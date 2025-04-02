@@ -160,11 +160,27 @@ var player_fighter
 var e_wizard
 var e_fighter
 var e_healer
+var cast
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	player_wizard = enemy_wizard.new(80,40,15,2,'wizard')
+	player_wizard = wizard.new(80,40,15,2,'wizard')
+	player_tank = tank.new(120,20,30,1,'tank')
+	player_assassin = assassin.new(60,2,8,3,'assassin')
+	player_fighter = fighter.new(100,30,20,2,'fighter')
+	e_wizard = enemy_wizard.new(80,40,15,2,'enemy_wizard')
+	e_fighter = enemy_fighter.new(100,30,20,2,'enemy_fighter')
+	e_healer = enemy_healer.new(75,50,10,2,'enemy_healer')
+	cast = {
+		'wizard' : player_wizard,
+		'assassin' : player_assassin,
+		'tank' : player_tank,
+		'fighter' : player_fighter,
+		'enemy_fighter' : e_fighter,
+		'enemy_healer' : e_healer,
+		'enemy_wizard' : e_wizard,
+	}
 	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -209,5 +225,3 @@ func action(attacker, target, action):
 		if(action=='attack'):
 			var damageDealt = attacker.attack()
 			target.takeDamage(damageDealt)
-	
-	pass
