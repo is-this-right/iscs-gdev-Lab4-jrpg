@@ -1,0 +1,14 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1743596622
+icon.svg::CompressedTexture2D::6956229761659410619::1743588805::1743596623::1::::<><>::
+::res://scenes/::1743596603
+character.tscn::PackedScene::5880284251472724611::1743588805::0::1::::<><>::res://scripts/character.gd
+enemy_group.tscn::PackedScene::5777528194734570060::1743588805::0::1::::<><>::res://scripts/enemy_group.gd
+game.tscn::PackedScene::8439711389628811082::1743596603::0::1::::<><>::uid://cokxbsk5miufs::::res://scenes/enemy_group.tscn<>uid://cjvtokg8ifdbs::::res://scenes/player_group.tscn
+player_group.tscn::PackedScene::5449072052953567880::1743588805::0::1::::<><>::res://scripts/player_group.gd
+::res://scripts/::1743596603
+action.gd::GDScript::-1::1743588805::0::1::::<>VBoxContainer<>::
+character.gd::GDScript::-1::1743588805::0::1::::<>CharacterBody2D<>::
+enemy_group.gd::GDScript::-1::1743588805::0::1::::<>Node2D<>::
+game.gd::GDScript::-1::1743588805::0::1::::<>Node2D<>::
+player_group.gd::GDScript::-1::1743588805::0::1::::<>Node2D<>::

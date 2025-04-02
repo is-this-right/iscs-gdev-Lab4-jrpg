@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://csjlggwrwnb3b"]
+
+[ext_resource type="Script" path="res://main_game.gd" id="1_4iuvp"]
+[ext_resource type="PackedScene" uid="uid://cokxbsk5miufs" path="res://scenes/enemy_group.tscn" id="2_j5hun"]
+[ext_resource type="PackedScene" uid="uid://cjvtokg8ifdbs" path="res://scenes/player_group.tscn" id="3_2kge2"]
+
+[node name="main_game" type="Node2D"]
+script = ExtResource("1_4iuvp")
+
+[node name="EnemyGroup" parent="." instance=ExtResource("2_j5hun")]
+
+[node name="enemy_healer" type="Node2D" parent="EnemyGroup"]
+
+[node name="enemy_fighter" type="Node2D" parent="EnemyGroup"]
+
+[node name="enemy_wizard" type="Node2D" parent="EnemyGroup"]
+
+[node name="player_group" parent="." instance=ExtResource("3_2kge2")]
+
+[node name="wizard" type="Node2D" parent="player_group"]
+
+[node name="tank" type="Node2D" parent="player_group"]
+
+[node name="fighter" type="Node2D" parent="player_group"]
+
+[node name="assassin" type="Node2D" parent="player_group"]
