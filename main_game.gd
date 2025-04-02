@@ -1,5 +1,12 @@
 extends Node2D
 
+@onready var attack: Button = $CanvasLayer/action/Attack
+@onready var defend = $CanvasLayer/action/Defend
+@onready var heal = $CanvasLayer/action/Heal
+@onready var combo_attack = $"CanvasLayer/action/Combo Attack"
+@onready var mana_attack = $"CanvasLayer/action/Mana Attack"
+@onready var mark = $CanvasLayer/action/Mark
+
 class character: #each c
 	var health
 	var defense
@@ -177,6 +184,14 @@ var current_character_turn
 var selected_target
 var current_char_action
 
+
+# template to connect the button presses
+func attack_button():
+	attack.pressed.connect(_attack_pressed)
+func _attack_pressed():
+	print("Attack Button Pressed")
+	
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	player_wizard = wizard.new(80,40,15,2,'wizard')
@@ -201,6 +216,10 @@ func _ready() -> void:
 	current_character_turn = turn_queue[turn_pointer]
 	print(current_character_turn)
 	set_clickable_action()
+	attack.pressed.connect(
+		func attack_pressed():
+		print("Attack pressed")
+		)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

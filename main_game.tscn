@@ -1,11 +1,51 @@
-[gd_scene load_steps=4 format=3 uid="uid://csjlggwrwnb3b"]
+[gd_scene load_steps=5 format=3 uid="uid://csjlggwrwnb3b"]
 
 [ext_resource type="Script" path="res://main_game.gd" id="1_4iuvp"]
 [ext_resource type="PackedScene" uid="uid://cokxbsk5miufs" path="res://scenes/enemy_group.tscn" id="2_j5hun"]
+[ext_resource type="Texture2D" uid="uid://dcjerrpt5gwdi" path="res://assets/JWDLx5AZBtI.jpg" id="2_xb677"]
 [ext_resource type="PackedScene" uid="uid://cjvtokg8ifdbs" path="res://scenes/player_group.tscn" id="3_2kge2"]
 
 [node name="main_game" type="Node2D"]
 script = ExtResource("1_4iuvp")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 320.0
+offset_bottom = 180.0
+scale = Vector2(3.6, 3.6)
+texture = ExtResource("2_xb677")
+expand_mode = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="action" type="VBoxContainer" parent="CanvasLayer"]
+offset_left = 1011.0
+offset_top = 429.0
+offset_right = 1128.0
+offset_bottom = 635.0
+
+[node name="Attack" type="Button" parent="CanvasLayer/action"]
+layout_mode = 2
+text = "Attack"
+
+[node name="Defend" type="Button" parent="CanvasLayer/action"]
+layout_mode = 2
+text = "Defend"
+
+[node name="Heal" type="Button" parent="CanvasLayer/action"]
+layout_mode = 2
+text = "Heal"
+
+[node name="Combo Attack" type="Button" parent="CanvasLayer/action"]
+layout_mode = 2
+text = "Combo Attack"
+
+[node name="Mana Attack" type="Button" parent="CanvasLayer/action"]
+layout_mode = 2
+text = "Mana Attack"
+
+[node name="Mark" type="Button" parent="CanvasLayer/action"]
+layout_mode = 2
+text = "Mark"
 
 [node name="EnemyGroup" parent="." instance=ExtResource("2_j5hun")]
 script = null
