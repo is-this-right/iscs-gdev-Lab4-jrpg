@@ -277,7 +277,6 @@ func set_clickable_action():
 	if current_character_turn == 'wizard':
 		# mana restrictions
 		pass
-	if current_character_turn == ''
 	pass
 
 func set_clickable_target():
