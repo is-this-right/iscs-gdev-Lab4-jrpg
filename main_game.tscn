@@ -8,6 +8,7 @@
 script = ExtResource("1_4iuvp")
 
 [node name="EnemyGroup" parent="." instance=ExtResource("2_j5hun")]
+script = null
 
 [node name="enemy_healer" type="Node2D" parent="EnemyGroup"]
 
@@ -16,6 +17,7 @@ script = ExtResource("1_4iuvp")
 [node name="enemy_wizard" type="Node2D" parent="EnemyGroup"]
 
 [node name="player_group" parent="." instance=ExtResource("3_2kge2")]
+script = null
 
 [node name="wizard" type="Node2D" parent="player_group"]
 

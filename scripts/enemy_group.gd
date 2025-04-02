@@ -30,7 +30,6 @@ func _process(delta: float) -> void:
 	if queue.size() == enemies.size() and not is_battling:
 		is_battling = true
 
-
 func switch_focus(focus, unfocus):
 	enemies[focus].focus()
 	enemies[unfocus].unfocus()
