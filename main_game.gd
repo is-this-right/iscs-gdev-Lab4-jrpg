@@ -8,7 +8,7 @@ class character: #each c
 	var defense_buff = 0
 	var charName = ""
 	
-	func character(hp: int, atk:int, def:int, sp:int, c_name:String):
+	func _init(hp: int, atk:int, def:int, sp:int, c_name:String):
 		health = hp
 		defense = def
 		speed = sp
@@ -25,7 +25,7 @@ class wizard extends character:
 	var atk
 	var actions = ['arcane_blast','arcane_piercer','defend']
 	
-	func wizard(hp: int, atk:int, def:int, sp:int, c_name:String):
+	func _init(hp: int, atk:int, def:int, sp:int, c_name:String):
 		health = hp
 		defense = def
 		atk=atk
@@ -47,7 +47,7 @@ class wizard extends character:
 class tank extends character:
 	var atk
 	var actions = ['attack','defend']
-	func tank(hp: int, atk:int, def:int, sp:int, c_name:String):
+	func _init(hp: int, atk:int, def:int, sp:int, c_name:String):
 		health = hp
 		defense = def
 		atk=atk
@@ -68,7 +68,7 @@ class fighter extends character:
 	var combo = 0
 	var actions = ['strike','combo_strike','defend']
 	
-	func fighter(hp: int, atk:int, def:int, sp:int, c_name:String):
+	func _init(hp: int, atk:int, def:int, sp:int, c_name:String):
 		health = hp
 		defense = def
 		atk=atk
@@ -87,12 +87,11 @@ class fighter extends character:
 	func defend():
 		defense_buff=15
 	
-		
 class assassin extends character:
 	var atk
 	var actions = ['attack','mark']
 	
-	func assassin(hp: int, atk:int, def:int, sp:int, c_name:String):
+	func _init(hp: int, atk:int, def:int, sp:int, c_name:String):
 		health = hp
 		defense = def
 		atk=atk
@@ -106,7 +105,7 @@ class enemy_healer extends character:
 	var mark = 0
 	var atk
 	var actions = ['heal','defend']
-	func enemy_healer(hp: int, atk:int, def:int, sp:int, c_name:String):
+	func _init(hp: int, atk:int, def:int, sp:int, c_name:String):
 		health = hp
 		defense = def
 		speed = sp
@@ -122,7 +121,7 @@ class enemy_fighter extends character:
 	var mark = 0
 	var atk
 	var actions = ['attack','defend']
-	func enemy_fighter(hp: int, atk:int, def:int, sp:int, c_name:String):
+	func _init(hp: int, atk:int, def:int, sp:int, c_name:String):
 		health = hp
 		defense = def
 		speed = sp
@@ -138,7 +137,7 @@ class enemy_wizard extends character:
 	var atk
 	var actions = ['spell','defend']
 	
-	func enemy_wizard(hp: int, atk:int, def:int, sp:int, c_name:String):
+	func _init(hp: int, atk:int, def:int, sp:int, c_name:String):
 		health = hp
 		defense = def
 		atk=atk
@@ -154,9 +153,16 @@ class enemy_wizard extends character:
 		mana+=30
 	
 
-
+var player_wizard
+var player_tank
+var player_assassin
+var player_fighter
+var e_wizard
+var e_fighter
+var e_healer
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	player_wizard = enemy_wizard.new(80,40,15,2,'wizard')
 	pass # Replace with function body.
 
 
