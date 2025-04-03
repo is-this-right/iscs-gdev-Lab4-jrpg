@@ -1,5 +1,8 @@
-Button
-TextEdit
-MarginContainer
 Node2D
 Node
+MarginContainer
+Button
+Container
+Area2D
+CollisionShape2D
+TextEdit

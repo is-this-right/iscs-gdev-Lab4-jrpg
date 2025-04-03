@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://csjlggwrwnb3b"]
+[gd_scene load_steps=9 format=3 uid="uid://csjlggwrwnb3b"]
 
 [ext_resource type="Script" path="res://main_game.gd" id="1_4iuvp"]
 [ext_resource type="PackedScene" uid="uid://cokxbsk5miufs" path="res://scenes/enemy_group.tscn" id="2_j5hun"]
 [ext_resource type="Texture2D" uid="uid://dcjerrpt5gwdi" path="res://assets/JWDLx5AZBtI.jpg" id="2_xb677"]
 [ext_resource type="PackedScene" uid="uid://cjvtokg8ifdbs" path="res://scenes/player_group.tscn" id="3_2kge2"]
+[ext_resource type="Script" path="res://wizard.gd" id="5_irtcx"]
 [ext_resource type="Texture2D" uid="uid://byyno3o3k8fg6" path="res://assets/wizard.png" id="5_t3epk"]
 [ext_resource type="Texture2D" uid="uid://o7lr3ig0g60x" path="res://assets/tank.png" id="6_qgulu"]
 [ext_resource type="Texture2D" uid="uid://1gpmvggkyuxg" path="res://assets/assassin.png" id="7_olrc5"]
@@ -21,10 +22,10 @@ expand_mode = 1
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="action" type="VBoxContainer" parent="CanvasLayer"]
-offset_left = 1007.0
-offset_top = 392.0
-offset_right = 1124.0
-offset_bottom = 633.0
+offset_left = 71.0
+offset_top = 379.0
+offset_right = 192.0
+offset_bottom = 620.0
 
 [node name="Attack" type="Button" parent="CanvasLayer/action"]
 layout_mode = 2
@@ -54,34 +55,14 @@ text = "Combo Strike"
 layout_mode = 2
 text = "Arcane Piercer"
 
-[node name="enemy" type="VBoxContainer" parent="CanvasLayer"]
-offset_left = 867.0
-offset_top = 535.0
-offset_right = 986.0
-offset_bottom = 636.0
-
-[node name="enemy_wizard" type="Button" parent="CanvasLayer/enemy"]
-layout_mode = 2
-text = "enemy_wizard
-"
-
-[node name="enemy_fighter" type="Button" parent="CanvasLayer/enemy"]
-layout_mode = 2
-text = "enemy_fighter"
-
-[node name="enemy_healer" type="Button" parent="CanvasLayer/enemy"]
-layout_mode = 2
-text = "enemy_healer
-"
-
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 190.0
-offset_top = 536.0
-offset_right = -303.0
-offset_bottom = -16.0
+offset_left = 249.0
+offset_top = 495.0
+offset_right = -243.0
+offset_bottom = -25.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -92,38 +73,35 @@ editable = false
 [node name="nextPress" type="Button" parent="CanvasLayer/MarginContainer"]
 layout_mode = 2
 
-[node name="EnemyGroup" parent="." instance=ExtResource("2_j5hun")]
+[node name="character" type="Node2D" parent="."]
+
+[node name="player_group" parent="character" instance=ExtResource("3_2kge2")]
+position = Vector2(235, -21)
 script = null
 
-[node name="enemy_healer" type="Node2D" parent="EnemyGroup"]
+[node name="wizard" type="Node2D" parent="character/player_group"]
+position = Vector2(-109, 59)
+script = ExtResource("5_irtcx")
 
-[node name="enemy_fighter" type="Node2D" parent="EnemyGroup"]
-
-[node name="enemy_wizard" type="Node2D" parent="EnemyGroup"]
-
-[node name="player_group" parent="." instance=ExtResource("3_2kge2")]
-script = null
-
-[node name="wizard" type="Node2D" parent="player_group"]
-
-[node name="Sprite2D" type="Sprite2D" parent="player_group/wizard"]
+[node name="Sprite2D" type="Sprite2D" parent="character/player_group/wizard"]
 position = Vector2(122, 92)
 texture = ExtResource("5_t3epk")
 
-[node name="ProgressBar" type="ProgressBar" parent="player_group/wizard"]
+[node name="ProgressBar" type="ProgressBar" parent="character/player_group/wizard"]
 offset_left = 78.0
 offset_top = 22.0
 offset_right = 158.0
 offset_bottom = 52.0
 value = 100.0
 
-[node name="tank" type="Node2D" parent="player_group"]
+[node name="tank" type="Node2D" parent="character/player_group"]
+position = Vector2(-105, -62)
 
-[node name="Sprite2D" type="Sprite2D" parent="player_group/tank"]
+[node name="Sprite2D" type="Sprite2D" parent="character/player_group/tank"]
 position = Vector2(125, 488)
 texture = ExtResource("6_qgulu")
 
-[node name="ProgressBar" type="ProgressBar" parent="player_group/tank"]
+[node name="ProgressBar" type="ProgressBar" parent="character/player_group/tank"]
 custom_minimum_size = Vector2(80, 30)
 offset_left = 80.0
 offset_top = 415.0
@@ -131,13 +109,13 @@ offset_right = 160.0
 offset_bottom = 445.0
 value = 100.0
 
-[node name="fighter" type="Node2D" parent="player_group"]
+[node name="fighter" type="Node2D" parent="character/player_group"]
 
-[node name="Sprite2D" type="Sprite2D" parent="player_group/fighter"]
+[node name="Sprite2D" type="Sprite2D" parent="character/player_group/fighter"]
 position = Vector2(129, 238)
 texture = ExtResource("6_qgulu")
 
-[node name="ProgressBar" type="ProgressBar" parent="player_group/fighter"]
+[node name="ProgressBar" type="ProgressBar" parent="character/player_group/fighter"]
 custom_minimum_size = Vector2(80, 30)
 offset_left = 84.0
 offset_top = 165.0
@@ -145,10 +123,10 @@ offset_right = 164.0
 offset_bottom = 195.0
 value = 100.0
 
-[node name="assassin" type="Node2D" parent="player_group"]
+[node name="assassin" type="Node2D" parent="character/player_group"]
 position = Vector2(-10, -16)
 
-[node name="ProgressBar" type="ProgressBar" parent="player_group/assassin"]
+[node name="ProgressBar" type="ProgressBar" parent="character/player_group/assassin"]
 custom_minimum_size = Vector2(80, 30)
 offset_left = 88.0
 offset_top = 300.0
@@ -156,7 +134,64 @@ offset_right = 168.0
 offset_bottom = 330.0
 value = 100.0
 
-[node name="Sprite2D" type="Sprite2D" parent="player_group/assassin"]
+[node name="Sprite2D" type="Sprite2D" parent="character/player_group/assassin"]
 position = Vector2(132, 376)
 scale = Vector2(0.835938, 0.65625)
 texture = ExtResource("7_olrc5")
+
+[node name="EnemyGroup" parent="character" instance=ExtResource("2_j5hun")]
+script = null
+
+[node name="enemy_healer" type="Node2D" parent="character/EnemyGroup"]
+
+[node name="healthBar" type="ProgressBar" parent="character/EnemyGroup/enemy_healer"]
+offset_left = 618.0
+offset_top = 52.0
+offset_right = 698.0
+offset_bottom = 82.0
+value = 100.0
+
+[node name="Container" type="MarginContainer" parent="character/EnemyGroup/enemy_healer"]
+offset_left = 629.0
+offset_top = 81.0
+offset_right = 689.0
+offset_bottom = 149.0
+
+[node name="Button" type="Button" parent="character/EnemyGroup/enemy_healer/Container"]
+layout_mode = 2
+
+[node name="enemy_fighter" type="Node2D" parent="character/EnemyGroup"]
+
+[node name="healthbar" type="ProgressBar" parent="character/EnemyGroup/enemy_fighter"]
+offset_left = 627.0
+offset_top = 351.0
+offset_right = 707.0
+offset_bottom = 381.0
+value = 100.0
+
+[node name="Container" type="MarginContainer" parent="character/EnemyGroup/enemy_fighter"]
+offset_left = 636.0
+offset_top = 388.0
+offset_right = 696.0
+offset_bottom = 456.0
+
+[node name="Button" type="Button" parent="character/EnemyGroup/enemy_fighter/Container"]
+layout_mode = 2
+
+[node name="enemy_wizard" type="Node2D" parent="character/EnemyGroup"]
+
+[node name="healthbar" type="ProgressBar" parent="character/EnemyGroup/enemy_wizard"]
+offset_left = 623.0
+offset_top = 205.0
+offset_right = 703.0
+offset_bottom = 235.0
+value = 100.0
+
+[node name="Container" type="MarginContainer" parent="character/EnemyGroup/enemy_wizard"]
+offset_left = 633.0
+offset_top = 243.0
+offset_right = 693.0
+offset_bottom = 311.0
+
+[node name="Button" type="Button" parent="character/EnemyGroup/enemy_wizard/Container"]
+layout_mode = 2
