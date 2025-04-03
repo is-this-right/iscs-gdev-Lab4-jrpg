@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://csjlggwrwnb3b"]
+[gd_scene load_steps=10 format=3 uid="uid://csjlggwrwnb3b"]
 
 [ext_resource type="Script" path="res://main_game.gd" id="1_4iuvp"]
 [ext_resource type="PackedScene" uid="uid://cokxbsk5miufs" path="res://scenes/enemy_group.tscn" id="2_j5hun"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://byyno3o3k8fg6" path="res://assets/wizard.png" id="5_t3epk"]
 [ext_resource type="Texture2D" uid="uid://o7lr3ig0g60x" path="res://assets/tank.png" id="6_qgulu"]
 [ext_resource type="Texture2D" uid="uid://1gpmvggkyuxg" path="res://assets/assassin.png" id="7_olrc5"]
+[ext_resource type="Texture2D" uid="uid://cg8npq6gmjl1u" path="res://assets/goblin.png" id="9_ec8bk"]
 
 [node name="main_game" type="Node2D"]
 script = ExtResource("1_4iuvp")
@@ -160,7 +161,17 @@ offset_bottom = 149.0
 [node name="Button" type="Button" parent="character/EnemyGroup/enemy_healer/Container"]
 layout_mode = 2
 
+[node name="Sprite2D" type="Sprite2D" parent="character/EnemyGroup/enemy_healer"]
+position = Vector2(658, 115)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("9_ec8bk")
+
 [node name="enemy_fighter" type="Node2D" parent="character/EnemyGroup"]
+
+[node name="Sprite2D" type="Sprite2D" parent="character/EnemyGroup/enemy_fighter"]
+position = Vector2(663, 278)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("9_ec8bk")
 
 [node name="healthbar" type="ProgressBar" parent="character/EnemyGroup/enemy_fighter"]
 offset_left = 627.0
@@ -179,6 +190,11 @@ offset_bottom = 456.0
 layout_mode = 2
 
 [node name="enemy_wizard" type="Node2D" parent="character/EnemyGroup"]
+
+[node name="Sprite2D" type="Sprite2D" parent="character/EnemyGroup/enemy_wizard"]
+position = Vector2(666, 422)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("9_ec8bk")
 
 [node name="healthbar" type="ProgressBar" parent="character/EnemyGroup/enemy_wizard"]
 offset_left = 623.0
