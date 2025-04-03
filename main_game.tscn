@@ -50,6 +50,21 @@ text = "Mana Attack"
 layout_mode = 2
 text = "Mark"
 
+[node name="enemy" type="VBoxContainer" parent="CanvasLayer"]
+offset_left = 917.0
+offset_top = 569.0
+offset_right = 991.0
+offset_bottom = 635.0
+
+[node name="enemy" type="Button" parent="CanvasLayer/enemy"]
+layout_mode = 2
+text = "Enemy
+"
+
+[node name="enemy1" type="Button" parent="CanvasLayer/enemy"]
+layout_mode = 2
+text = "Enemy 1"
+
 [node name="EnemyGroup" parent="." instance=ExtResource("2_j5hun")]
 script = null
 
