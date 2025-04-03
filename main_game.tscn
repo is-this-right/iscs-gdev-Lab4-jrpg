@@ -21,10 +21,10 @@ expand_mode = 1
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="action" type="VBoxContainer" parent="CanvasLayer"]
-offset_left = 1011.0
-offset_top = 429.0
-offset_right = 1128.0
-offset_bottom = 635.0
+offset_left = 1007.0
+offset_top = 392.0
+offset_right = 1124.0
+offset_bottom = 633.0
 
 [node name="Attack" type="Button" parent="CanvasLayer/action"]
 layout_mode = 2
@@ -34,36 +34,63 @@ text = "Attack"
 layout_mode = 2
 text = "Defend"
 
-[node name="Heal" type="Button" parent="CanvasLayer/action"]
+[node name="Strike" type="Button" parent="CanvasLayer/action"]
 layout_mode = 2
-text = "Heal"
+text = "Strike"
 
-[node name="Combo Attack" type="Button" parent="CanvasLayer/action"]
+[node name="Arcane_Blast" type="Button" parent="CanvasLayer/action"]
 layout_mode = 2
-text = "Combo Attack"
-
-[node name="Mana Attack" type="Button" parent="CanvasLayer/action"]
-layout_mode = 2
-text = "Mana Attack"
+text = "Arcane Blast"
 
 [node name="Mark" type="Button" parent="CanvasLayer/action"]
 layout_mode = 2
 text = "Mark"
 
-[node name="enemy" type="VBoxContainer" parent="CanvasLayer"]
-offset_left = 917.0
-offset_top = 569.0
-offset_right = 991.0
-offset_bottom = 635.0
-
-[node name="enemy" type="Button" parent="CanvasLayer/enemy"]
+[node name="Combo_Strike" type="Button" parent="CanvasLayer/action"]
 layout_mode = 2
-text = "Enemy
+text = "Combo Strike"
+
+[node name="Arcane_Piercer" type="Button" parent="CanvasLayer/action"]
+layout_mode = 2
+text = "Arcane Piercer"
+
+[node name="enemy" type="VBoxContainer" parent="CanvasLayer"]
+offset_left = 867.0
+offset_top = 535.0
+offset_right = 986.0
+offset_bottom = 636.0
+
+[node name="enemy_wizard" type="Button" parent="CanvasLayer/enemy"]
+layout_mode = 2
+text = "enemy_wizard
 "
 
-[node name="enemy1" type="Button" parent="CanvasLayer/enemy"]
+[node name="enemy_fighter" type="Button" parent="CanvasLayer/enemy"]
 layout_mode = 2
-text = "Enemy 1"
+text = "enemy_fighter"
+
+[node name="enemy_healer" type="Button" parent="CanvasLayer/enemy"]
+layout_mode = 2
+text = "enemy_healer
+"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 190.0
+offset_top = 536.0
+offset_right = -303.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GamePhaseAnnouncer" type="TextEdit" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+editable = false
+
+[node name="nextPress" type="Button" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
 
 [node name="EnemyGroup" parent="." instance=ExtResource("2_j5hun")]
 script = null
@@ -93,10 +120,24 @@ value = 100.0
 [node name="tank" type="Node2D" parent="player_group"]
 
 [node name="Sprite2D" type="Sprite2D" parent="player_group/tank"]
-position = Vector2(129, 238)
+position = Vector2(125, 488)
 texture = ExtResource("6_qgulu")
 
 [node name="ProgressBar" type="ProgressBar" parent="player_group/tank"]
+custom_minimum_size = Vector2(80, 30)
+offset_left = 80.0
+offset_top = 415.0
+offset_right = 160.0
+offset_bottom = 445.0
+value = 100.0
+
+[node name="fighter" type="Node2D" parent="player_group"]
+
+[node name="Sprite2D" type="Sprite2D" parent="player_group/fighter"]
+position = Vector2(129, 238)
+texture = ExtResource("6_qgulu")
+
+[node name="ProgressBar" type="ProgressBar" parent="player_group/fighter"]
 custom_minimum_size = Vector2(80, 30)
 offset_left = 84.0
 offset_top = 165.0
@@ -104,9 +145,8 @@ offset_right = 164.0
 offset_bottom = 195.0
 value = 100.0
 
-[node name="fighter" type="Node2D" parent="player_group"]
-
 [node name="assassin" type="Node2D" parent="player_group"]
+position = Vector2(-10, -16)
 
 [node name="ProgressBar" type="ProgressBar" parent="player_group/assassin"]
 custom_minimum_size = Vector2(80, 30)

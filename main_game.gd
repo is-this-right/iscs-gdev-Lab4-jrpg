@@ -1,11 +1,23 @@
 extends Node2D
 
 @onready var attack: Button = $CanvasLayer/action/Attack
-@onready var defend = $CanvasLayer/action/Defend
-@onready var heal = $CanvasLayer/action/Heal
-@onready var combo_attack = $"CanvasLayer/action/Combo Attack"
-@onready var mana_attack = $"CanvasLayer/action/Mana Attack"
-@onready var mark = $CanvasLayer/action/Mark
+@onready var defend: Button = $CanvasLayer/action/Defend
+@onready var spell1: Button = $CanvasLayer/action/Arcane_Piercer
+@onready var spell2: Button = $CanvasLayer/action/Arcane_Blast
+@onready var mark: Button = $CanvasLayer/action/Mark
+@onready var strike1: Button = $CanvasLayer/action/Strike
+@onready var strike2: Button = $CanvasLayer/action/Combo_Strike
+
+@onready var actionPanel = $CanvasLayer/action
+@onready var enemyPanel = $CanvasLayer/enemy
+
+@onready var e_wiz_target = $CanvasLayer/enemy/enemy_wizard
+@onready var e_fight_target = $CanvasLayer/enemy/enemy_fighter
+@onready var e_heal_target = $CanvasLayer/enemy/enemy_healer
+
+@onready var nextPress = $CanvasLayer/MarginContainer/nextPress
+
+@onready var announcementText = $CanvasLayer/MarginContainer/GamePhaseAnnouncer
 
 class character: #each c
 	var health
@@ -183,15 +195,7 @@ var turn_pointer
 var current_character_turn
 var selected_target
 var current_char_action
-
-
-# template to connect the button presses
-func attack_button():
-	attack.pressed.connect(_attack_pressed)
-func _attack_pressed():
-	print("Attack Button Pressed")
 	
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	player_wizard = wizard.new(80,40,15,2,'wizard')
@@ -219,7 +223,88 @@ func _ready() -> void:
 	attack.pressed.connect(
 		func attack_pressed():
 		print("Attack pressed")
+		current_char_action = "attack"
+		select_phase = 1
+		gameUpdate()
 		)
+	defend.pressed.connect(
+		func defend_pressed():
+		print("defend pressed")
+		current_char_action = "defend"
+		selected_target = null
+		select_phase = 2
+		gameUpdate()
+	)
+	mark.pressed.connect(
+		func mark_pressed():
+		print("mark pressed")
+		current_char_action = "mark"
+		select_phase = 1
+		gameUpdate()
+	)
+	spell1.pressed.connect(
+		func spell1_pressed():
+		print("spell1 pressed")
+		current_char_action = "arcane_piercer"
+		select_phase = 1
+		gameUpdate()
+	)
+	spell2.pressed.connect(
+		func spell2_pressed():
+		print("spell2 pressed")
+		current_char_action = "arcane_blast"
+		select_phase = 1
+		gameUpdate()
+	)
+	strike1.pressed.connect(
+		func strike1_pressed():
+		print("strike1 pressed")
+		current_char_action = "strike"
+		select_phase = 1
+		gameUpdate()
+	)
+	strike2.pressed.connect(
+		func strike2_pressed():
+		print("strike2 pressed")
+		current_char_action = "combo_strike"
+		select_phase = 1
+		gameUpdate()
+	)
+	
+	e_wiz_target.pressed.connect(
+		func e_wiz_target_pressed():
+		print("e_wiz_target pressed")
+		selected_target = "enemy_wizard"
+		select_phase = 2
+		gameUpdate()
+	)
+	e_heal_target.pressed.connect(
+		func e_heal_target_pressed():
+		print("e_heal_target pressed")
+		selected_target = "enemy_healer"
+		select_phase = 2
+		gameUpdate()
+	)
+	e_fight_target.pressed.connect(
+		func e_fight_target_pressed():
+		print("e_fight_target pressed")
+		selected_target = "enemy_fighter"
+		select_phase = 2
+		gameUpdate()
+	)
+	nextPress.pressed.connect(
+		func nextP():
+		print("next pressed")
+		selected_target = "enemy_fighter"
+		select_phase = 0
+		turn_pointer += 1
+		turn_pointer %= len(turn_queue)
+		current_character_turn = turn_queue[turn_pointer]
+		gameUpdate()
+	)
+	
+	gameUpdate()
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -290,12 +375,37 @@ func populate_queue():
 				cast_speed[key]-=1
 	turn_queue = returnQ
 	
-
 func set_clickable_action():
-	# set the clickable actions depending on who is moving
-	if current_character_turn == 'wizard':
-		# mana restrictions
-		pass
+	# disable everything first
+	for i in actionPanel.get_children():
+		i.disabled = true
+	
+	for i in enemyPanel.get_children():
+		i.disabled = true
+		
+	
+	if select_phase == 0:
+		# set the clickable actions depending on who is moving
+		if current_character_turn == 'wizard':
+			defend.disabled = false
+			# mana restrictions
+			if player_wizard.mana > 20:
+				spell2.disabled = false
+			if player_wizard.mana > 15:
+				spell1.disabled = false
+		elif current_character_turn == 'tank':
+			defend.disabled = false
+			attack.disabled = false
+		elif current_character_turn == 'fighter':
+			defend.disabled = false
+			strike1.disabled = false
+			strike2.disabled = false
+		elif current_character_turn == 'assassin': 
+			attack.disabled = false
+			mark.disabled = false
+	elif select_phase == 1:
+		for i in enemyPanel.get_children():
+			i.disabled = false
 	pass
 
 func set_clickable_target():
@@ -323,3 +433,15 @@ func ai_select_target(ai_name:String):
 		pass
 	elif ai_name == 'enemy_healer':
 		pass 
+
+func gameUpdate():
+	# starting a turn
+	if select_phase == 0:
+		#print(current_character_turn," is currently selecting an action")
+		announcementText.text = (current_character_turn) + " is currently selecting an action"
+	elif select_phase == 1:
+		announcementText.text = (current_character_turn) + " is using " + (current_char_action)
+	elif select_phase == 2:
+		announcementText.text = (current_character_turn) + " is using " + (current_char_action) + " on " + String(selected_target)
+	
+	set_clickable_action()
